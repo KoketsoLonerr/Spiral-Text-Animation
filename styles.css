@@ -1,0 +1,45 @@
+/* Apply styles to the entire document */
+body, html {
+    height: 100%; /* Set height to 100% of the viewport */
+    margin: 0; /* Remove default margin */
+    display: inline-block; /* Use inline-block display for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: rgb(19, 41, 54); /* Set background color */
+    overflow: hidden; /* Hide overflow content */
+}
+
+/* Styles for the spiral container */
+.spiral {
+    display: flex; /* Use flex display for the spiral container */
+    align-items: center; /* Center items vertically */
+    gap: 10px; /* Set gap between items */
+    position: absolute; /* Position the spiral container absolutely */
+}
+
+/* Define a custom property for the rotation angle of the spiral */
+@property --angle {
+    syntax: '<angle>'; /* Specify syntax for the custom property */
+    initial-value: 0deg; /* Set initial value to 0 degrees */
+    inherits: false; /* Do not inherit the value */
+}
+
+/* Define a keyframe animation for the spiral rotation */
+@keyframes spiral {
+    0% {
+        --angle: 0deg; /* Start angle at 0 degrees */
+    }
+    100% {
+        --angle: 360deg; /* End angle at 360 degrees for a full rotation */
+    }
+}
+
+/* Styles for the animated character */
+.character {
+    color: white; /* Set text color to white */
+    font-size: 4em; /* Set font size */
+    /* Use translateY and scale to create a vertical movement and scaling effect based on the rotation angle */
+    transform: translateY(calc(sin(var(--angle)) * 100px)) scale(calc(cos(var(--angle)) * 0.5 + 0.5));
+    /* Apply the spiral animation with a duration of 4 seconds, linear timing, and infinite repetition */
+    animation: spiral 4s linear infinite;
+}
